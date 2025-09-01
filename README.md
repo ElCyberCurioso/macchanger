@@ -1,6 +1,6 @@
 # MAC Changer with Python
 
-Python3 tool to change MAC address of an interface
+Python3 tool to change MAC address of an interface (ethX or ensX)
 
 ## Setup
 
