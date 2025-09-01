@@ -6,6 +6,7 @@ Python3 tool to change MAC address of an interface (ethX or ensX)
 
 ```bash
 git clone https://github.com/ElCyberCurioso/macchanger
+cd macchanger
 python3 macchanger.py <args>
 ```
 
