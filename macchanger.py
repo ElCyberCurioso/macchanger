@@ -4,12 +4,12 @@ import argparse, re, subprocess
 from termcolor import colored
 
 def get_arguments():
-    parser = argparse.ArgumentParser(description="Herramienta para cambiar la direccion MAC de una interfaz de red")
-    parser.add_argument("-i", "--interface", required=True, dest="interface", help="Nombre de la interfaz de red")
+    parser = argparse.ArgumentParser(description="Tool for changing the MAC address of a network interface")
+    parser.add_argument("-i", "--interface", required=True, dest="interface", help="Network interface name")
     group = parser.add_mutually_exclusive_group(required=True)
 
-    group.add_argument("-m", "--mac", dest="mac_address", help="Nueva direccion MAC para la interfaz de red")
-    group.add_argument("-r", "--reverse", dest="reverse", action=argparse.BooleanOptionalAction, help="Setear nuevamente la MAC permanente")
+    group.add_argument("-m", "--mac", dest="mac_address", help="New MAC address for the network interface")
+    group.add_argument("-r", "--reverse", dest="reverse", action=argparse.BooleanOptionalAction, help="Reset the permanent MAC address")
 
     return parser.parse_args()
 
@@ -33,15 +33,15 @@ def change_mac_address(interface, mac_address, is_reverse):
         if is_reverse:
             subprocess.run(["macchanger", "-p", interface], stdout=subprocess.DEVNULL)
 
-            print(colored(f"\n[+] La MAC se ha restaurado exitosamente!", "green"))
+            print(colored(f"\n[+] The MAC has been successfully changed!", "green"))
         elif is_valid_mac_address:
             subprocess.run(["ifconfig", interface, "down"])
             subprocess.run(["ifconfig", interface, "hw", "ether", mac_address])
             subprocess.run(["ifconfig", interface, "up"])
 
-            print(colored(f"\n[+] La MAC ha sido cambiada exitosamente!\n", "green"))
+            print(colored(f"\n[+] The MAC has been successfully changed!\n", "green"))
     else:
-        print(colored("\n[!] Los datos introducidos no son correctos\n", "red"))
+        print(colored("\n[!] The MAC has been successfully restored!\n", "red"))
 
 def main():
 
